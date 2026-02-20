@@ -144,6 +144,18 @@ a {
   font-size: 16px;
 }
 
+  /* Fix hamburger icon color for Safari mobile */
+  .nav__toggle {
+    color: var(--brand-accent);
+  }
+
+  .nav--on-dark .nav__toggle {
+    color: #fff;
+  }
+  .nav--on-light .nav__toggle {
+    color: var(--brand-accent);
+  }
+
 .nav--on-dark {
   color: #fff;
 }
