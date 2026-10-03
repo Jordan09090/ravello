@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin Login | Ravello</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" type="image/png" href="img/lightlogo.png">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/admin.css">
+</head>
+<body class="admin-auth-body">
+  <main class="admin-auth-card">
+    <img src="img/darklogo.png" alt="Ravello" class="admin-auth-logo">
+    <h1>Admin Login</h1>
+    <p class="admin-auth-hint">Sign in to manage prices, blog posts, the FAQ and site details.</p>
+    <form id="login-form">
+      <label>
+        Email
+        <input type="email" id="login-email" autocomplete="username" required>
+      </label>
+      <label>
+        Password
+        <input type="password" id="login-password" autocomplete="current-password" required>
+      </label>
+      <button type="submit" class="btn btn--primary" id="login-btn">Log In</button>
+      <p class="admin-auth-error" id="login-error" hidden></p>
+    </form>
+    <a class="admin-auth-back" href="index.html">← Back to site</a>
+  </main>
+
+  <script type="module">
+    import { auth } from "./scripts/firebase-init.js";
+    import { signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+
+    onAuthStateChanged(auth, user => {
+      if (user) location.href = "admin.html";
+    });
+
+    const form = document.getElementById("login-form");
+    const errorEl = document.getElementById("login-error");
+    const btn = document.getElementById("login-btn");
+
+    form.addEventListener("submit", async event => {
+      event.preventDefault();
+      errorEl.hidden = true;
+      btn.disabled = true;
+      btn.textContent = "Signing in…";
+      try {
+        await signInWithEmailAndPassword(
+          auth,
+          document.getElementById("login-email").value.trim(),
+          document.getElementById("login-password").value
+        );
+        location.href = "admin.html";
+      } catch (err) {
+        errorEl.textContent = "Couldn't sign in — check your email and password and try again.";
+        errorEl.hidden = false;
+        btn.disabled = false;
+        btn.textContent = "Log In";
+      }
+    });
+  </script>
+</body>
+</html>

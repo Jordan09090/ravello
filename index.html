@@ -1,17 +1,24 @@
 <!doctype html>
-<html lang="en">
+<html lang="en-AU">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Ravello Spray Tan Studio | Mobile & In-Studio Tanning</title>
-  <meta name="description" content="Natural-looking spray tans that flatter your skin tone. Mobile and in-studio services with custom color blends and premium solutions.">
-  <meta name="keywords" content="spray tan, mobile spray tan, organic spray tan, rapid tan, bridal tan, tanning studio">
+  <title>Ravello Spray Tan Studio | Perth Mobile & In-Studio Spray Tans</title>
+  <meta name="description" content="Perth's private spray tan studio in Lathlain. Natural-looking, custom-blended spray tans with premium skin-loving solutions. Mobile and in-studio bookings available.">
+  <meta name="keywords" content="spray tan Perth, mobile spray tan Perth, organic spray tan, rapid tan, bridal spray tan Perth, tanning studio Lathlain">
+  <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://www.ravello.com.au/">
-  <meta property="og:title" content="Ravello Spray Tan Studio">
-  <meta property="og:description" content="Natural-looking spray tans with custom color blends. Mobile and in-studio availability.">
+  <meta property="og:site_name" content="Ravello Spray Tan Studio">
+  <meta property="og:title" content="Ravello Spray Tan Studio | Perth Mobile & In-Studio Spray Tans">
+  <meta property="og:description" content="Natural-looking spray tans with custom colour blends. Mobile and in-studio availability in Perth, WA.">
   <meta property="og:type" content="website">
+  <meta property="og:locale" content="en_AU">
   <meta property="og:url" content="https://www.ravello.com.au/">
-  <meta property="og:image" content="https://www.ravello.com.au/og-image.jpg">
+  <meta property="og:image" content="https://www.ravello.com.au/img/og-image.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Ravello Spray Tan Studio | Perth Mobile & In-Studio Spray Tans">
+  <meta name="twitter:description" content="Natural-looking spray tans with custom colour blends. Mobile and in-studio availability in Perth, WA.">
+  <meta name="twitter:image" content="https://www.ravello.com.au/img/og-image.jpg">
   <meta name="theme-color" content="#c1785f">
   <link rel="icon" type="image/png" href="img/lightlogo.png">
   <link rel="apple-touch-icon" href="img/lightlogo.png">
@@ -23,10 +30,14 @@
     {
       "@context": "https://schema.org",
       "@type": "LocalBusiness",
+      "@id": "https://www.ravello.com.au/#business",
       "name": "Ravello Spray Tan Studio",
-      "image": "https://www.ravello.com.au/og-image.jpg",
+      "description": "Perth's private spray tan studio in Lathlain. Natural-looking, custom-blended spray tans with premium skin-loving solutions. Mobile and in-studio bookings available.",
+      "image": "https://www.ravello.com.au/img/og-image.jpg",
+      "logo": "https://www.ravello.com.au/img/darklogo.png",
       "url": "https://www.ravello.com.au/",
       "telephone": "+61 413 268 335",
+      "email": "ravellotans@gmail.com",
       "priceRange": "$$",
       "address": {
         "@type": "PostalAddress",
@@ -38,8 +49,7 @@
       },
       "openingHours": "Mo-Sa 09:00-20:00",
       "sameAs": [
-        "https://www.instagram.com/ravellotans",
-        "https://www.tiktok.com/@yourhandle"
+        "https://www.instagram.com/ravellotans"
       ],
       "areaServed": "City + surrounding areas",
       "serviceType": "Spray Tanning"
@@ -49,18 +59,7 @@
 <body>
   <div class="page-shell">
     <header class="hero" id="home" data-nav-theme="dark">
-      <nav class="nav nav--on-dark">
-        <div class="nav__brand">
-          <img src="img/lightlogo.png" alt="Ravello spray tan logo" class="nav__logo nav__logo--light">
-          <img src="img/darklogo.png" alt="Ravello spray tan logo" class="nav__logo nav__logo--dark">
-        </div>
-        <button class="nav__toggle" aria-label="Toggle navigation">☰</button>
-        <ul class="nav__links">
-          <li><a href="#services">Services</a></li>
-          <li><a href="#contact">Contact</a></li>
-          <li><a href="https://book.squareup.com/appointments/0ktylsxk2qasvu/location/LJ00TF1GQ198E/services">Book Now</a></li>
-        </ul>
-      </nav>
+      <nav class="nav nav--on-dark" data-site-nav></nav>
       <!--Add hero image in CSS as a URL-->
       <div class="hero__inner">
         <div class="hero__copy">
@@ -88,7 +87,7 @@
         <div class="feature feature--elevated">
           <div class="feature__media">
             <div class="feature__media-inner">
-              <img src="img/showerback.png" alt="Golden legs resting on textured stone" loading="lazy">
+              <img src="img/showerback.jpg" alt="Golden legs resting on textured stone" loading="lazy" width="1600" height="1080">
             </div>
           </div>
           <div class="feature__content">
@@ -226,8 +225,7 @@ the tan’s life cycle.</p>
           <h2>Custom Spray Tans to Suit Your Needs</h2>
           <p class="lede"><!--description--></p>
         </div>
-        <div class="grid grid--3">
-          
+        <div class="grid grid--3" id="services-grid">
           <article class="card">
             <h3>Bridal Spray Tans</h3>
             <p>Your wedding tan deserves time, care, and precision. Includes a bridal trial to perfect shade, development time, and finish well before the big day.</p>
@@ -240,7 +238,7 @@ the tan’s life cycle.</p>
           <article class="card">
             <h3>Custom Spray Tan</h3>
             <p>A fully customised spray tan tailored to your skin type, natural tone, and desired depth. Whether you’re after a soft glow or a deep bronze for a special event, your tan is blended specifically for you.</p>
-            <p class="card__meta">15 mins • $40</p>
+            <p class="card__meta">15 mins • $35</p>
             <div class="card__actions">
               <a class="btn btn--primary" href="https://book.squareup.com/appointments/0ktylsxk2qasvu/location/LJ00TF1GQ198E/services">Book now</a>
             </div>
@@ -310,63 +308,33 @@ the tan’s life cycle.</p>
       </div>
     </section>
 
-    <footer class="footer" id="contact" data-nav-theme="dark">
-      <div class="footer__inner">
-        <div class="footer__brand">
-          <div class="footer__logo-wrap">
-            <img src="img/lightlogo.png" alt="Ravello spray tan logo" class="footer__logo">
-          </div>
-          <p class="footer__tagline">The Custom Spray Tan Specialist</p>
-        </div>
-
-        <div class="footer__social footer__social--icons">
-          <a class="footer__social-btn" href="https://www.instagram.com/ravellotans" target="_blank" rel="noopener" aria-label="Follow on Instagram">
-            <span class="footer__icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" role="presentation" focusable="false">
-                <rect x="3.5" y="3.5" width="17" height="17" rx="4.2" fill="none" stroke="currentColor" stroke-width="1.6" />
-                <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.6" />
-                <circle cx="17" cy="7" r="1.2" fill="currentColor" />
-              </svg>
-            </span>
-            <span class="sr-only">Instagram</span>
-          </a>
-          <!-- TICKTOK ICON - UNCOMMENT IF NEEDED
-          <a class="footer__social-btn" href="https://www.tiktok.com/@yourhandle" target="_blank" rel="noopener" aria-label="Follow on TikTok">
-            <span class="footer__icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" role="presentation" focusable="false">
-                <path d="M15.5 5.2c.7.9 1.6 1.5 2.8 1.7v2.2c-1.2-.1-2.2-.5-3-.9v5.2a4.7 4.7 0 1 1-4.7-4.7c.3 0 .6 0 .9.1v2.2c-.1 0-.2-.1-.3-.1a2.4 2.4 0 1 0 2.1 2.4V4.5h2.2v.7Z" fill="currentColor"/>
-              </svg>
-            </span>
-            <span class="sr-only">TikTok</span>
-          </a>
-        -->
-        </div>
-
-        <div class="footer__meta">
-          <div class="footer__meta-block">
-            <p class="footer__label">Visit</p>
-            <p class="footer__text">Lathlain<br>Perth, WA 6100</p>
-          </div>
-          <div class="footer__meta-block">
-            <p class="footer__label">Phone</p>
-            <p class="footer__text"><a href="tel:+61413268335">+61 413 268 335</a><br><!--Second Line (if needed)--></p>
-          </div>
-          <div class="footer__meta-block">
-            <p class="footer__label">Email</p>
-            <p class="footer__text"><a href="mailto:ravellotans@gmail.com">ravellotans@gmail.com</a></p>
-          </div>
-        </div>
-      </div>
-      <div class="footer__bottom">
-        <span>© <span data-year></span> Ravello Spray Tans. All rights reserved.</span>
-        <div class="footer__bottom-links">
-          <a href="#services">Services</a>
-          <a href="#testimonials">Reviews</a>
-        </div>
-      </div>
-    </footer>
+    <footer class="footer" id="contact" data-nav-theme="dark" data-site-footer></footer>
 
   </div>
   <script src="scripts/main.js"></script>
+  <script type="module" src="scripts/site-chrome.js"></script>
+  <script type="module">
+    import { db } from "./scripts/firebase-init.js";
+    import { ref, onValue } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-database.js";
+
+    function escapeHtml(str) {
+      return String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    }
+
+    onValue(ref(db, "services"), snapshot => {
+      const val = snapshot.val() || {};
+      const items = Object.values(val).sort((a, b) => (a.order || 0) - (b.order || 0));
+      if (!items.length) return; // keep the cards already in the HTML
+      document.getElementById("services-grid").innerHTML = items.map(s => `
+        <article class="card">
+          <h3>${escapeHtml(s.name || "")}</h3>
+          <p>${escapeHtml(s.description || "")}</p>
+          <p class="card__meta">${escapeHtml(s.meta || "")}</p>
+          <div class="card__actions">
+            <a class="btn btn--primary" href="${escapeHtml(s.ctaHref || "#")}">${escapeHtml(s.ctaLabel || "Book now")}</a>
+          </div>
+        </article>`).join("");
+    });
+  </script>
 </body>
 </html>

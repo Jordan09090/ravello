@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FAQ | Ravello Spray Tan Studio Perth</title>
+  <meta name="description" content="Common questions about spray tanning at Ravello, Perth's private spray tan studio — booking, pricing, preparation and aftercare.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://www.ravello.com.au/faq.html">
+  <meta property="og:site_name" content="Ravello Spray Tan Studio">
+  <meta property="og:title" content="FAQ | Ravello Spray Tan Studio Perth">
+  <meta property="og:description" content="Common questions about spray tanning at Ravello, Perth's private spray tan studio.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="en_AU">
+  <meta property="og:url" content="https://www.ravello.com.au/faq.html">
+  <meta property="og:image" content="https://www.ravello.com.au/img/og-image.jpg">
+  <meta name="theme-color" content="#c1785f">
+  <link rel="icon" type="image/png" href="img/lightlogo.png">
+  <link rel="apple-touch-icon" href="img/lightlogo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Belleza&family=Italianno&family=Space+Mono:wght@400;700&family=Playfair+Display:wght@500;600;700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/blog.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="hero hero--compact" id="faq-top" data-nav-theme="dark" style="--hero-image: url('img/blog-hero-bg.jpg');">
+      <nav class="nav nav--on-dark" data-site-nav></nav>
+      <div class="hero__inner">
+        <p class="hero__crumbs"><a href="index.html">Home</a> / FAQ</p>
+        <h1>Frequently Asked Questions</h1>
+        <p class="lede">Everything you might want to know before booking your spray tan with us.</p>
+      </div>
+    </header>
+
+    <main data-nav-theme="light" id="faq-main">
+      <div class="faq-list" id="faq-list">
+        <p class="blog-grid__loading">Loading…</p>
+      </div>
+    </main>
+
+    <footer class="footer" id="contact" data-nav-theme="dark" data-site-footer></footer>
+  </div>
+  <script src="scripts/main.js"></script>
+  <script type="module" src="scripts/site-chrome.js"></script>
+  <script type="module">
+    import { db } from "./scripts/firebase-init.js";
+    import { ref, onValue } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-database.js";
+
+    function escapeHtml(str) {
+      return String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    }
+
+    const list = document.getElementById("faq-list");
+
+    onValue(ref(db, "faq"), snapshot => {
+      const val = snapshot.val() || {};
+      const items = Object.values(val).sort((a, b) => (a.order || 0) - (b.order || 0));
+
+      if (!items.length) {
+        list.innerHTML = '<p class="blog-grid__loading">No questions added yet — check back soon.</p>';
+        return;
+      }
+
+      list.innerHTML = items.map(item => `
+        <details class="faq-item">
+          <summary>${escapeHtml(item.question || "")}</summary>
+          <div class="faq-item__answer">${escapeHtml(item.answer || "")}</div>
+        </details>
+      `).join("");
+
+      // Structured data for rich results, built from whatever is live.
+      const jsonLd = document.createElement("script");
+      jsonLd.type = "application/ld+json";
+      jsonLd.textContent = JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: items.map(item => ({
+          "@type": "Question",
+          name: item.question || "",
+          acceptedAnswer: { "@type": "Answer", text: item.answer || "" }
+        }))
+      });
+      document.head.appendChild(jsonLd);
+    });
+  </script>
+</body>
+</html>

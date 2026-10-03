@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Spray Tan Blog | Tips, Guides & Advice | Ravello Perth</title>
+  <meta name="description" content="Spray tan tips, beforecare and aftercare guides from Ravello, Perth's private spray tan studio. Learn how to get the best, longest-lasting tan.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://www.ravello.com.au/blog.html">
+  <meta property="og:site_name" content="Ravello Spray Tan Studio">
+  <meta property="og:title" content="Spray Tan Blog | Tips, Guides & Advice | Ravello Perth">
+  <meta property="og:description" content="Spray tan tips, beforecare and aftercare guides from Ravello, Perth's private spray tan studio.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="en_AU">
+  <meta property="og:url" content="https://www.ravello.com.au/blog.html">
+  <meta property="og:image" content="https://www.ravello.com.au/img/og-image.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Spray Tan Blog | Tips, Guides & Advice | Ravello Perth">
+  <meta name="twitter:description" content="Spray tan tips, beforecare and aftercare guides from Ravello, Perth's private spray tan studio.">
+  <meta name="twitter:image" content="https://www.ravello.com.au/img/og-image.jpg">
+  <meta name="theme-color" content="#c1785f">
+  <link rel="icon" type="image/png" href="img/lightlogo.png">
+  <link rel="apple-touch-icon" href="img/lightlogo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Belleza&family=Italianno&family=Space+Mono:wght@400;700&family=Playfair+Display:wght@500;600;700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/blog.css">
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Blog",
+      "name": "Ravello Spray Tan Blog",
+      "url": "https://www.ravello.com.au/blog.html",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Ravello Spray Tan Studio",
+        "logo": { "@type": "ImageObject", "url": "https://www.ravello.com.au/img/darklogo.png" }
+      }
+    }
+  </script>
+</head>
+<body>
+  <div class="page-shell">
+    <header class="hero hero--compact" id="blog-top" data-nav-theme="dark" style="--hero-image: url('https://www.spamosman.com.au/cdn/shop/collections/sprayTan.jpg?v=1784097689');">
+      <nav class="nav nav--on-dark" data-site-nav></nav>
+      <div class="hero__inner">
+        <p class="hero__crumbs"><a href="index.html">Home</a> / Blog</p>
+        <h1>Spray Tan Tips &amp; Guides</h1>
+        <p class="lede">Everything you need to know to get the best, longest-lasting spray tan — from our Perth studio to you.</p>
+      </div>
+    </header>
+
+    <main data-nav-theme="light" id="posts">
+      <div id="blog-grid" class="blog-grid" aria-live="polite">
+        <p class="blog-grid__loading">Loading posts…</p>
+      </div>
+    </main>
+
+    <footer class="footer" id="contact" data-nav-theme="dark" data-site-footer></footer>
+  </div>
+  <script src="scripts/main.js"></script>
+  <script type="module" src="scripts/site-chrome.js"></script>
+  <script type="module">
+    import { watchAllPosts, escapeHtml } from "./scripts/blog-data.js";
+
+    const grid = document.getElementById("blog-grid");
+
+    watchAllPosts(posts => {
+      if (!posts.length) {
+        grid.innerHTML = '<p class="blog-grid__loading">No posts yet — check back soon.</p>';
+        return;
+      }
+      grid.innerHTML = posts.map(post => {
+        const img = post.primaryImage || (post.images && post.images[0]) || "img/og-image.jpg";
+        const excerpt = (post.description || "").slice(0, 140);
+        return `
+          <article class="blog-card">
+            <a class="blog-card__media" href="post.html?id=${encodeURIComponent(post.id)}">
+              <img src="${img}" alt="${escapeHtml(post.title || "")}" loading="lazy">
+            </a>
+            <div class="blog-card__body">
+              <p class="blog-card__category">${escapeHtml(post.category || "Spray Tan Tips")}</p>
+              <h2><a href="post.html?id=${encodeURIComponent(post.id)}">${escapeHtml(post.title || "Untitled post")}</a></h2>
+              <p class="blog-card__excerpt">${escapeHtml(excerpt)}</p>
+              <a class="blog-card__link" href="post.html?id=${encodeURIComponent(post.id)}">Read the guide</a>
+            </div>
+          </article>`;
+      }).join("");
+    });
+  </script>
+</body>
+</html>

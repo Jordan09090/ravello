@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin | Ravello</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" type="image/png" href="img/lightlogo.png">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Work+Sans:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/admin.css">
+</head>
+<body class="admin-body">
+  <div class="admin-topbar">
+    <div class="admin-topbar__brand">
+      <img src="img/lightlogo.png" alt="Ravello">
+      Admin
+    </div>
+    <div class="admin-topbar__right">
+      <span class="admin-topbar__user" id="admin-user"></span>
+      <button class="admin-btn admin-btn--ghost admin-btn--small" id="logout-btn">Log out</button>
+    </div>
+  </div>
+
+  <div class="admin-shell">
+    <div class="admin-tabs">
+      <button class="admin-tab is-active" data-tab="services">Services &amp; Prices</button>
+      <button class="admin-tab" data-tab="gallery">Gallery</button>
+      <button class="admin-tab" data-tab="blogs">Blog Posts</button>
+      <button class="admin-tab" data-tab="faq">FAQ</button>
+      <button class="admin-tab" data-tab="site">Site Info</button>
+      <button class="admin-tab" data-tab="setup">Setup</button>
+    </div>
+
+    <!-- SERVICES & PRICES -->
+    <section class="admin-panel is-active" data-panel="services">
+      <div class="admin-card">
+        <h2 id="service-form-title">Add a Service</h2>
+        <p class="admin-card__hint">These are the service cards shown in the Services section on the home page.</p>
+        <form class="admin-form" id="service-form">
+          <input type="hidden" id="service-id">
+          <label>Name<input type="text" id="service-name" required></label>
+          <div class="admin-form-row">
+            <label>Duration / price text<input type="text" id="service-meta" placeholder="e.g. 15 mins • $35"></label>
+            <label>Button label<input type="text" id="service-cta-label" placeholder="Book now"></label>
+          </div>
+          <label>Button link<input type="text" id="service-cta-href" placeholder="https://... or mailto:..."></label>
+          <label>Description<textarea id="service-description" style="min-height:100px" placeholder="Short description shown on the card"></textarea></label>
+          <div class="admin-actions">
+            <button type="submit" class="admin-btn admin-btn--primary">Save Service</button>
+            <button type="button" class="admin-btn admin-btn--ghost" id="service-cancel" hidden>Cancel edit</button>
+            <span class="admin-status" id="service-status"></span>
+          </div>
+        </form>
+      </div>
+      <div class="admin-card">
+        <h2>Current Services</h2>
+        <div class="admin-list" id="service-list"></div>
+      </div>
+    </section>
+
+    <!-- GALLERY (shared media library) -->
+    <section class="admin-panel" data-panel="gallery">
+      <div class="admin-card">
+        <h2>Add Photos</h2>
+        <p class="admin-card__hint">Upload once here, then pick these photos in any blog post instead of re-uploading them each time.</p>
+        <div class="admin-tip">All photos are auto-cropped to a square. Aim for <strong>1200–1600px</strong> on the shortest side with the subject centred. Use <strong>JPG or PNG</strong> — not HEIC (iPhone's default).</div>
+        <input type="file" accept="image/*" id="media-upload" multiple>
+        <p class="admin-status" id="media-upload-status"></p>
+      </div>
+      <div class="admin-card">
+        <h2>Your Photos</h2>
+        <div class="admin-gallery-grid" id="media-grid"></div>
+      </div>
+    </section>
+
+    <!-- BLOG POSTS -->
+    <section class="admin-panel" data-panel="blogs">
+      <div class="admin-card">
+        <h2 id="blog-form-title">Add a Blog Post</h2>
+        <p class="admin-card__hint">Paste your article text as-is into the big box — spacing, tabs and dot points are kept exactly as typed. No dates are shown anywhere.</p>
+        <form class="admin-form" id="blog-form">
+          <input type="hidden" id="blog-id">
+          <label>Title<input type="text" id="blog-title" required></label>
+          <div class="admin-form-row">
+            <label>Category<input type="text" id="blog-category" placeholder="Spray Tan Tips" value="Spray Tan Tips"></label>
+          </div>
+          <label>Description (used for the blog list + Google search preview)<textarea id="blog-description" style="min-height:70px" required></textarea></label>
+
+          <div class="admin-tip">
+            All photos are auto-cropped to a square. Aim for <strong>1200–1600px</strong> on the shortest side with the subject centred. Use <strong>JPG or PNG</strong> — not HEIC (iPhone's default).
+          </div>
+
+          <label>
+            Thumbnail photo (also used as the header photo)
+            <input type="file" accept="image/*" id="blog-primary-image">
+          </label>
+          <div class="admin-url-row">
+            <input type="text" id="blog-primary-image-url" placeholder="…or paste an image URL instead">
+            <button type="button" class="admin-btn admin-btn--ghost admin-btn--small" id="blog-primary-image-url-add">Use this image</button>
+            <button type="button" class="admin-btn admin-btn--ghost admin-btn--small" id="blog-primary-gallery-toggle">Choose from Gallery</button>
+          </div>
+          <div class="admin-gallery-picker" id="blog-primary-gallery-picker" hidden></div>
+          <div class="admin-image-preview" id="blog-primary-preview"></div>
+
+          <label>
+            Extra photos for the carousel (choose multiple)
+            <input type="file" accept="image/*" id="blog-gallery-images" multiple>
+          </label>
+          <div class="admin-url-row">
+            <input type="text" id="blog-gallery-image-url" placeholder="…or paste an image URL to add it to the carousel">
+            <button type="button" class="admin-btn admin-btn--ghost admin-btn--small" id="blog-gallery-image-url-add">Add image</button>
+            <button type="button" class="admin-btn admin-btn--ghost admin-btn--small" id="blog-gallery-gallery-toggle">Add from Gallery</button>
+          </div>
+          <div class="admin-gallery-picker" id="blog-gallery-gallery-picker" hidden></div>
+          <div class="admin-image-preview" id="blog-gallery-preview"></div>
+          <p class="admin-image-note">Uploaded photos are compressed automatically before saving as text (no paid storage plan is needed). Pasted image URLs are used as-is — click a preview thumbnail's × to remove it.</p>
+
+          <div>
+            <label for="blog-content" style="display:block; margin-bottom:6px;">Content</label>
+            <span class="admin-toolbar">
+              <button type="button" class="admin-toolbar__btn" id="content-bold-btn" title="Bold"><strong>B</strong></button>
+              <button type="button" class="admin-toolbar__btn" id="content-link-btn" title="Add link">🔗 Link</button>
+              <button type="button" class="admin-toolbar__btn" id="content-list-btn" title="Bullet list">• List</button>
+            </span>
+            <div id="blog-content" class="admin-rich-editor" contenteditable="true" data-placeholder="Paste your blog text here…"></div>
+          </div>
+          <p class="admin-image-note">Select some text and click Bold or Link to see it styled right there in the box. For bullet points, click List, then type each point and press Enter for the next one. Everything else (spacing, tabs) is kept exactly as typed.</p>
+
+          <div class="admin-actions">
+            <button type="submit" class="admin-btn admin-btn--primary" id="blog-save-btn">Save Post</button>
+            <button type="button" class="admin-btn admin-btn--ghost" id="blog-cancel" hidden>Cancel edit</button>
+            <span class="admin-status" id="blog-status"></span>
+          </div>
+        </form>
+      </div>
+      <div class="admin-card">
+        <h2>Published Posts</h2>
+        <div class="admin-list" id="blog-list"></div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="admin-panel" data-panel="faq">
+      <div class="admin-card">
+        <h2 id="faq-form-title">Add a Question</h2>
+        <form class="admin-form" id="faq-form">
+          <input type="hidden" id="faq-id">
+          <label>Question<input type="text" id="faq-question" required></label>
+          <label>Answer<textarea id="faq-answer" style="min-height:120px" required></textarea></label>
+          <div class="admin-actions">
+            <button type="submit" class="admin-btn admin-btn--primary">Save Question</button>
+            <button type="button" class="admin-btn admin-btn--ghost" id="faq-cancel" hidden>Cancel edit</button>
+            <span class="admin-status" id="faq-status"></span>
+          </div>
+        </form>
+      </div>
+      <div class="admin-card">
+        <h2>Current FAQ</h2>
+        <div class="admin-list" id="faq-list-admin"></div>
+      </div>
+    </section>
+
+    <!-- SITE INFO (nav + footer) -->
+    <section class="admin-panel" data-panel="site">
+      <div class="admin-card">
+        <h2>Navigation Menu</h2>
+        <p class="admin-card__hint">Shown at the top of every page, in this order.</p>
+        <div id="nav-rows"></div>
+        <div class="admin-actions">
+          <button type="button" class="admin-btn admin-btn--ghost admin-btn--small" id="nav-add-row">+ Add link</button>
+          <button type="button" class="admin-btn admin-btn--primary" id="nav-save">Save Menu</button>
+          <span class="admin-status" id="nav-status"></span>
+        </div>
+      </div>
+
+      <div class="admin-card">
+        <h2>Footer Details</h2>
+        <form class="admin-form" id="footer-form">
+          <label>Tagline<input type="text" id="footer-tagline-input"></label>
+          <label>Address (use a new line for a line break)<textarea id="footer-address-input" style="min-height:70px"></textarea></label>
+          <div class="admin-form-row">
+            <label>Phone<input type="text" id="footer-phone-input"></label>
+            <label>Email<input type="text" id="footer-email-input"></label>
+          </div>
+          <label>Instagram URL<input type="text" id="footer-instagram-input"></label>
+          <div class="admin-actions">
+            <button type="submit" class="admin-btn admin-btn--primary">Save Footer</button>
+            <span class="admin-status" id="footer-status"></span>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- SETUP / IMPORT -->
+    <section class="admin-panel" data-panel="setup">
+      <div class="admin-card">
+        <h2>One-time Setup</h2>
+        <p class="admin-card__hint">Click once to load the starter services, FAQ and menu/footer defaults that match the current site design. Safe to run more than once — it won't duplicate anything that already has content, except blog posts (skipped automatically if you already have posts).</p>
+        <div class="admin-actions">
+          <button type="button" class="admin-btn admin-btn--primary" id="seed-btn">Import Starter Content</button>
+          <span class="admin-status" id="seed-status"></span>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script type="module" src="scripts/admin.js"></script>
+</body>
+</html>

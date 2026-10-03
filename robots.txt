@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /admin.html
+Disallow: /admin-login.html
+Disallow: /post-template.html
+Disallow: /site-chrome.html
+
+Sitemap: https://www.ravello.com.au/sitemap.xml

@@ -1,0 +1,85 @@
+<!doctype html>
+<!--
+  This is the ONE page that holds the nav bar and footer markup for the
+  whole site. It is never opened directly — every other page fetches this
+  file via scripts/site-chrome.js and clones the two <template> blocks
+  below into itself. Edit the structure/design here once and it updates
+  on every page automatically.
+
+  The actual TEXT inside (menu links, phone number, address, etc.) is
+  then filled in from Firebase, so day-to-day edits happen in admin.html,
+  not here — this file only needs editing if the nav/footer's structure
+  or design itself changes.
+-->
+<html>
+<head><meta charset="utf-8"></head>
+<body>
+
+  <template id="site-nav-template">
+    <div class="nav__brand">
+      <a href="index.html" aria-label="Ravello home">
+        <img src="img/lightlogo.png" alt="Ravello spray tan logo" class="nav__logo nav__logo--light">
+        <img src="img/darklogo.png" alt="Ravello spray tan logo" class="nav__logo nav__logo--dark">
+      </a>
+    </div>
+    <button class="nav__toggle" aria-label="Toggle navigation">☰</button>
+    <ul class="nav__links" id="nav-links" data-dynamic-nav>
+      <li><a href="index.html#services">Services</a></li>
+      <li><a href="blog.html">Blogs</a></li>
+      <li><a href="faq.html">FAQ</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+      <li><a href="https://book.squareup.com/appointments/0ktylsxk2qasvu/location/LJ00TF1GQ198E/services" target="_blank" rel="noopener">Book Now</a></li>
+    </ul>
+  </template>
+
+  <template id="site-footer-template">
+    <div class="footer__inner">
+      <div class="footer__brand">
+        <div class="footer__logo-wrap">
+          <img src="img/lightlogo.png" alt="Ravello spray tan logo" class="footer__logo">
+        </div>
+        <p class="footer__tagline" id="footer-tagline">The Custom Spray Tan Specialist</p>
+      </div>
+
+      <div class="footer__social footer__social--icons">
+        <a class="footer__social-btn" id="footer-instagram" href="https://www.instagram.com/ravellotans" target="_blank" rel="noopener" aria-label="Follow on Instagram">
+          <span class="footer__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" role="presentation" focusable="false">
+              <rect x="3.5" y="3.5" width="17" height="17" rx="4.2" fill="none" stroke="currentColor" stroke-width="1.6" />
+              <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.6" />
+              <circle cx="17" cy="7" r="1.2" fill="currentColor" />
+            </svg>
+          </span>
+          <span class="sr-only">Instagram</span>
+        </a>
+      </div>
+
+      <div class="footer__meta">
+        <div class="footer__meta-block">
+          <p class="footer__label">Visit</p>
+          <p class="footer__text" id="footer-address">Lathlain<br>Perth, WA 6100</p>
+        </div>
+        <div class="footer__meta-block">
+          <p class="footer__label">Phone</p>
+          <p class="footer__text"><a id="footer-phone" href="tel:+61413268335">+61 413 268 335</a></p>
+        </div>
+        <div class="footer__meta-block">
+          <p class="footer__label">Email</p>
+          <p class="footer__text"><a id="footer-email" href="mailto:ravellotans@gmail.com">ravellotans@gmail.com</a></p>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© <span data-year></span> Ravello Spray Tans. All rights reserved.</span>
+      <div class="footer__bottom-links">
+        <a href="index.html#services">Services</a>
+        <a href="index.html#testimonials">Reviews</a>
+        <a href="blog.html">Blog</a>
+        <a href="faq.html">FAQ</a>
+        <a href="admin-login.html" class="footer__bottom-links-admin">Admin</a>
+      </div>
+    </div>
+  </template>
+
+</body>
+</html>

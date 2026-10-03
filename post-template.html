@@ -1,0 +1,177 @@
+<!--
+  ============================================================
+  HOW TO USE THIS TEMPLATE TO ADD A NEW BLOG POST
+  ============================================================
+  1. Duplicate this file (it lives at the site root, next to index.html
+     and blog.html) and rename it, e.g. "spray-tan-myths.html"
+     (use lower-case words separated by dashes, ending in .html)
+
+  2. Fill in the things marked with ">>> FILL IN <<<" below:
+       a) Page title + meta description (near the top, in <head>)
+       b) The page heading and breadcrumb (in the header banner)
+       c) The header banner photo (see dimensions note below)
+       d) The carousel images (add/remove/replace <img> lines — you can
+          mix upright and wide photos freely, see note below)
+       e) The article text (paste your AI-written text as-is)
+
+     Note: posts intentionally do NOT show a date anywhere (not on the
+     page, not in the page's metadata) so content stays evergreen.
+     Don't add one back in.
+
+  3. Formatting cheatsheet for the pasted text — it just works if
+     your AI-generated text already looks like this, no HTML needed:
+       ## A Section Heading         -> big heading
+       ### A Sub-heading            -> smaller heading
+       A short standalone line
+       like "1. Some Heading"       -> turns into a sub-heading automatically
+       - A bullet point             -> put a dash + space before each item
+       **important words**          -> bold
+       [Button text](page.html)     -> a line that is ONLY a link becomes a button
+       (leave a blank line between paragraphs, bullet lists, and headings)
+
+  4. Add a matching card to blog.html so people can find the post
+     (copy one <article class="blog-card"> block there and update it).
+
+  5. Add the new page's URL to sitemap.xml at the site root.
+
+  That's it — no other coding needed. The images and text are the only
+  things you touch; scripts/blog.js does the formatting automatically.
+  This page uses the exact same header, nav and footer as every other
+  page on the site, so it will always match automatically.
+
+  IMAGE DIMENSIONS
+  -----------------
+  Header banner photo (the --hero-image below): a wide, landscape photo,
+  ideally around 1920x800px (roughly 2.4:1), at least 1600px on the long
+  edge. It fills the banner and gets cropped at the edges to do so
+  (object-fit: cover), so keep the main subject centred in the frame.
+
+  Carousel photos: any size or shape works — landscape, portrait, square.
+  Each photo is shown in full without cropping (object-fit: contain), so
+  you can mix upright and wide photos in the same carousel freely. For
+  page-speed, keep each photo under ~500KB (resize to ~1400px on the
+  long edge and export as a compressed JPEG before uploading).
+  ============================================================
+-->
+<!doctype html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- >>> FILL IN <<< Page title (appears in the browser tab + Google search results) -->
+  <title>Your Post Title Here | Ravello</title>
+
+  <!-- >>> FILL IN <<< One or two sentences describing the post, for Google search results -->
+  <meta name="description" content="Write a short, one to two sentence summary of this post here.">
+
+  <!-- Change to "index, follow" once you've filled this template in and renamed the file -->
+  <meta name="robots" content="noindex, follow">
+
+  <!-- >>> FILL IN <<< Must match this file's final filename -->
+  <link rel="canonical" href="https://www.ravello.com.au/your-post-slug.html">
+
+  <meta property="og:site_name" content="Ravello Spray Tan Studio">
+  <!-- >>> FILL IN <<< repeat the title + description from above -->
+  <meta property="og:title" content="Your Post Title Here">
+  <meta property="og:description" content="Write a short, one to two sentence summary of this post here.">
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="en_AU">
+  <meta property="og:url" content="https://www.ravello.com.au/your-post-slug.html">
+  <!-- >>> FILL IN <<< use the same image as your first carousel slide -->
+  <meta property="og:image" content="https://www.ravello.com.au/img/your-image.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Your Post Title Here">
+  <meta name="twitter:description" content="Write a short, one to two sentence summary of this post here.">
+  <meta name="twitter:image" content="https://www.ravello.com.au/img/your-image.jpg">
+
+  <meta name="theme-color" content="#c1785f">
+  <link rel="icon" type="image/png" href="img/lightlogo.png">
+  <link rel="apple-touch-icon" href="img/lightlogo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Belleza&family=Italianno&family=Space+Mono:wght@400;700&family=Playfair+Display:wght@500;600;700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/blog.css">
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "Your Post Title Here",
+      "description": "Write a short, one to two sentence summary of this post here.",
+      "image": "https://www.ravello.com.au/img/your-image.jpg",
+      "author": { "@type": "Organization", "name": "Ravello Spray Tan Studio" },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Ravello Spray Tan Studio",
+        "logo": { "@type": "ImageObject", "url": "https://www.ravello.com.au/img/darklogo.png" }
+      },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://www.ravello.com.au/your-post-slug.html" }
+    }
+  </script>
+</head>
+<body>
+  <div class="page-shell">
+    <!-- >>> FILL IN <<< pick a background photo for the header banner.
+         Ideally ~1920x800px landscape (see IMAGE DIMENSIONS note above the <head>). -->
+    <header class="hero hero--compact" id="post-top" data-nav-theme="dark" style="--hero-image: url('img/your-image.jpg');">
+      <nav class="nav nav--on-dark" data-site-nav></nav>
+      <div class="hero__inner">
+        <!-- >>> FILL IN <<< breadcrumb text and heading. No date — keep it evergreen. -->
+        <p class="hero__crumbs"><a href="index.html">Home</a> / <a href="blog.html">Blog</a> / Your Post Title</p>
+        <h1>Your Post Title Here</h1>
+        <p class="hero__meta">Spray Tan Tips</p>
+      </div>
+    </header>
+
+    <main data-nav-theme="light" id="post">
+      <article class="blog-post">
+        <!-- >>> FILL IN <<< CAROUSEL IMAGES
+             Add or remove <div class="carousel__slide"> lines as needed (1 image is fine too).
+             Put your image files in the /img folder and point src at them.
+             Landscape and portrait/upright photos can be freely mixed — each
+             one displays in full without cropping. -->
+        <div class="carousel" aria-label="Photo carousel">
+          <div class="carousel__track">
+            <div class="carousel__slide"><img src="img/your-image-1.jpg" alt="Describe this photo" loading="lazy"></div>
+            <div class="carousel__slide"><img src="img/your-image-2.jpg" alt="Describe this photo" loading="lazy"></div>
+            <div class="carousel__slide"><img src="img/your-image-3.jpg" alt="Describe this photo" loading="lazy"></div>
+          </div>
+          <button class="carousel__btn carousel__btn--prev" aria-label="Previous image">‹</button>
+          <button class="carousel__btn carousel__btn--next" aria-label="Next image">›</button>
+          <div class="carousel__dots"></div>
+        </div>
+
+        <div class="blog-content" id="post-content"></div>
+
+        <!-- >>> FILL IN <<< PASTE YOUR ARTICLE TEXT BELOW, between the script tags.
+             Paste it exactly as your AI gives it to you (headings, bullet points, bold, etc).
+             See the formatting cheatsheet at the top of this file. Nothing else needs to change. -->
+        <script type="text/plain" class="blog-source" data-target="post-content">
+Paste your article text here.
+
+## Example Heading
+
+Example paragraph text goes here. It can be as long as you like.
+
+- Example bullet point one
+- Example bullet point two
+
+[Book Now](https://book.squareup.com/appointments/0ktylsxk2qasvu/location/LJ00TF1GQ198E/services)
+        </script>
+
+        <div class="blog-post__footer-cta">
+          <p>Ready to book your Perth spray tan?</p>
+          <a class="btn btn--primary" href="https://book.squareup.com/appointments/0ktylsxk2qasvu/location/LJ00TF1GQ198E/services" target="_blank" rel="noopener">Book now</a>
+        </div>
+      </article>
+    </main>
+
+    <footer class="footer" id="contact" data-nav-theme="dark" data-site-footer></footer>
+  </div>
+  <script src="scripts/main.js"></script>
+  <script src="scripts/blog.js"></script>
+  <script type="module" src="scripts/site-chrome.js"></script>
+</body>
+</html>

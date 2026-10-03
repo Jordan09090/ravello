@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Spray Tan Blog | Ravello</title>
+  <meta name="description" content="Spray tan tips and guides from Ravello, Perth's private spray tan studio.">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#c1785f">
+  <link rel="icon" type="image/png" href="img/lightlogo.png">
+  <link rel="apple-touch-icon" href="img/lightlogo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Belleza&family=Italianno&family=Space+Mono:wght@400;700&family=Playfair+Display:wght@500;600;700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/blog.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="hero hero--compact" id="post-top" data-nav-theme="dark" style="--hero-image: url('img/blog-hero-bg.jpg');">
+      <nav class="nav nav--on-dark" data-site-nav></nav>
+      <div class="hero__inner">
+        <p class="hero__crumbs" id="post-crumbs"><a href="index.html">Home</a> / <a href="blog.html">Blog</a></p>
+        <h1 id="post-heading">Loading…</h1>
+        <p class="hero__meta" id="post-category"></p>
+      </div>
+    </header>
+
+    <main data-nav-theme="light" id="post">
+      <article class="blog-post">
+        <div class="carousel" id="post-carousel" aria-label="Post photo carousel" hidden>
+          <div class="carousel__track" id="post-carousel-track"></div>
+          <button class="carousel__btn carousel__btn--prev" aria-label="Previous image">‹</button>
+          <button class="carousel__btn carousel__btn--next" aria-label="Next image">›</button>
+          <div class="carousel__dots"></div>
+        </div>
+
+        <div class="blog-content-raw" id="post-content">Loading post…</div>
+
+        <div class="blog-post__footer-cta">
+          <p>Ready to book your Perth spray tan?</p>
+          <a class="btn btn--primary" href="https://book.squareup.com/appointments/0ktylsxk2qasvu/location/LJ00TF1GQ198E/services" target="_blank" rel="noopener">Book now</a>
+        </div>
+
+        <div class="related-posts" id="related-posts" hidden>
+          <h2>You Might Also Like</h2>
+          <div class="related-posts__grid" id="related-posts-grid"></div>
+        </div>
+      </article>
+    </main>
+
+    <footer class="footer" id="contact" data-nav-theme="dark" data-site-footer></footer>
+  </div>
+  <script src="scripts/main.js"></script>
+  <script src="scripts/blog.js"></script>
+  <script type="module" src="scripts/site-chrome.js"></script>
+  <script type="module">
+    import { watchPost, watchAllPosts, escapeHtml, renderInline } from "./scripts/blog-data.js";
+
+    const params = new URLSearchParams(location.search);
+    const id = params.get("id");
+
+    const headingEl = document.getElementById("post-heading");
+    const categoryEl = document.getElementById("post-category");
+    const crumbsEl = document.getElementById("post-crumbs");
+    const contentEl = document.getElementById("post-content");
+    const heroEl = document.getElementById("post-top");
+    const carouselEl = document.getElementById("post-carousel");
+    const trackEl = document.getElementById("post-carousel-track");
+    const relatedWrap = document.getElementById("related-posts");
+    const relatedGrid = document.getElementById("related-posts-grid");
+
+    function setMeta(name, value, isProperty) {
+      const attr = isProperty ? "property" : "name";
+      let el = document.head.querySelector(`meta[${attr}="${name}"]`);
+      if (!el) {
+        el = document.createElement("meta");
+        el.setAttribute(attr, name);
+        document.head.appendChild(el);
+      }
+      el.setAttribute("content", value);
+    }
+
+    function addJsonLd(post) {
+      const script = document.createElement("script");
+      script.type = "application/ld+json";
+      script.textContent = JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        headline: post.title,
+        description: post.description || "",
+        image: post.primaryImage || (post.images && post.images[0]) || undefined,
+        author: { "@type": "Organization", name: "Ravello Spray Tan Studio" },
+        publisher: {
+          "@type": "Organization",
+          name: "Ravello Spray Tan Studio",
+          logo: { "@type": "ImageObject", url: "https://www.ravello.com.au/img/darklogo.png" }
+        }
+      });
+      document.head.appendChild(script);
+    }
+
+    if (!id) {
+      headingEl.textContent = "Post not found";
+      contentEl.textContent = "This post link looks broken — head back to the blog to find what you're after.";
+    } else {
+      watchPost(id, post => {
+        if (!post) {
+          headingEl.textContent = "Post not found";
+          contentEl.textContent = "This post may have been removed — head back to the blog to find what you're after.";
+          return;
+        }
+
+        document.title = `${post.title} | Ravello`;
+        setMeta("description", post.description || "");
+        setMeta("og:title", post.title, true);
+        setMeta("og:description", post.description || "", true);
+        setMeta("og:type", "article", true);
+        if (post.primaryImage) setMeta("og:image", post.primaryImage, true);
+
+        headingEl.textContent = post.title;
+        categoryEl.textContent = post.category || "Spray Tan Tips";
+        crumbsEl.innerHTML = `<a href="index.html">Home</a> / <a href="blog.html">Blog</a> / ${escapeHtml(post.title)}`;
+        contentEl.innerHTML = renderInline(post.content || "");
+
+        const heroImg = post.primaryImage || (post.images && post.images[0]);
+        if (heroImg) heroEl.style.setProperty("--hero-image", `url('${heroImg}')`);
+
+        // The thumbnail is always the first slide, followed by the extra
+        // carousel photos — previously these were treated as either/or,
+        // so adding extra photos alongside a thumbnail dropped the
+        // thumbnail and could leave just a single (non-carousel) slide.
+        const images = [...new Set([post.primaryImage, ...(post.images || [])].filter(Boolean))];
+        if (images.length) {
+          trackEl.innerHTML = images.map(src => `<div class="carousel__slide"><img src="${src}" alt="${escapeHtml(post.title)}" loading="lazy"></div>`).join("");
+          carouselEl.hidden = false;
+          if (window.RavelloBlog) window.RavelloBlog.initCarousels();
+        }
+
+        addJsonLd(post);
+
+        watchAllPosts(all => {
+          const others = all.filter(p => p.id !== id).slice(0, 4);
+          if (!others.length) return;
+          relatedWrap.hidden = false;
+          relatedGrid.innerHTML = others.map(p => {
+            const img = p.primaryImage || (p.images && p.images[0]) || "img/og-image.jpg";
+            return `<a class="related-posts__card" href="post.html?id=${encodeURIComponent(p.id)}">
+              <img src="${img}" alt="${escapeHtml(p.title || "")}" loading="lazy">
+              <span>${escapeHtml(p.title || "Untitled post")}</span>
+            </a>`;
+          }).join("");
+        });
+      });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+{
+  "rules": {
+    "services": {
+      ".read": true,
+      ".write": "auth != null"
+    },
+    "blogs": {
+      ".read": true,
+      ".write": "auth != null"
+    },
+    "faq": {
+      ".read": true,
+      ".write": "auth != null"
+    },
+    "site": {
+      ".read": true,
+      ".write": "auth != null"
+    },
+    "media": {
+      ".read": true,
+      ".write": "auth != null"
+    },
+    "$other": {
+      ".read": false,
+      ".write": false
+    }
+  }
+}
