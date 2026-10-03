@@ -1,0 +1,442 @@
+/* Styles for admin-login.html and admin.html. Deliberately plain/utilitarian
+   — this is a tool for one person to manage content, not a public page. */
+
+.admin-auth-body {
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: var(--brand-bg, #fff8f3);
+  font-family: "Work Sans", sans-serif;
+  padding: 20px;
+}
+
+.admin-auth-card {
+  width: min(380px, 100%);
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+  padding: 36px 32px;
+  text-align: center;
+}
+
+.admin-auth-logo { height: 48px; margin-bottom: 16px; }
+.admin-auth-card h1 { font-family: "Playfair Display", serif; font-size: 22px; margin: 0 0 6px; }
+.admin-auth-hint { font-size: 13.5px; color: #6b5a4f; margin: 0 0 22px; }
+
+.admin-auth-card form { display: grid; gap: 14px; text-align: left; }
+.admin-auth-card label { font-size: 13px; font-weight: 600; color: #4f362b; display: grid; gap: 6px; }
+.admin-auth-card input {
+  font: inherit;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(193, 120, 95, 0.3);
+}
+
+.admin-auth-error { color: #b3261e; font-size: 13px; margin: 4px 0 0; }
+.admin-auth-back { display: inline-block; margin-top: 18px; font-size: 13px; color: #6b5a4f; }
+
+/* ---------- Admin dashboard ---------- */
+
+body.admin-body {
+  margin: 0;
+  font-family: "Work Sans", sans-serif;
+  background: #f4ede6;
+  color: #2b1d16;
+}
+
+.admin-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 24px;
+  background: #2b1d16;
+  color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.admin-topbar__brand { display: flex; align-items: center; gap: 10px; font-weight: 600; }
+.admin-topbar__brand img { height: 30px; }
+.admin-topbar__user { font-size: 13px; opacity: 0.8; margin-right: 14px; }
+.admin-topbar__right { display: flex; align-items: center; }
+
+.admin-shell {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 28px 20px 80px;
+}
+
+.admin-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.admin-tab {
+  padding: 9px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(193, 120, 95, 0.35);
+  background: #fff;
+  font: inherit;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  color: #4f362b;
+}
+
+.admin-tab.is-active { background: #c1785f; color: #fff; border-color: #c1785f; }
+
+.admin-panel { display: none; }
+.admin-panel.is-active { display: block; }
+
+.admin-card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(193, 120, 95, 0.12);
+  padding: 22px 24px;
+  margin-bottom: 22px;
+}
+
+.admin-card h2 { font-family: "Playfair Display", serif; font-size: 19px; margin: 0 0 4px; }
+.admin-card > p.admin-card__hint { font-size: 13px; color: #6b5a4f; margin: 0 0 16px; }
+
+.admin-form { display: grid; gap: 14px; }
+
+.admin-form label {
+  display: grid;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #4f362b;
+}
+
+.admin-form input[type="text"],
+.admin-form input[type="number"],
+.admin-form input[type="url"],
+.admin-form textarea,
+.admin-form select {
+  font: inherit;
+  font-size: 14px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(193, 120, 95, 0.3);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.admin-form textarea {
+  min-height: 260px;
+  font-family: "Space Mono", monospace;
+  font-size: 13.5px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  resize: vertical;
+}
+
+/* Content editor: a "what you see is what you get" box — Bold/Link show
+   up styled immediately, no **markers** visible while typing. */
+.admin-rich-editor {
+  min-height: 260px;
+  font-family: "Work Sans", sans-serif;
+  font-size: 14.5px;
+  line-height: 1.7;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  tab-size: 4;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(193, 120, 95, 0.3);
+  outline: none;
+}
+
+.admin-rich-editor:focus {
+  border-color: rgba(193, 120, 95, 0.7);
+}
+
+.admin-rich-editor strong { font-weight: 700; }
+
+.admin-rich-editor a {
+  color: #2563eb;
+  text-decoration: underline;
+}
+
+.admin-rich-editor ul,
+.admin-rich-editor ol {
+  margin: 6px 0;
+  padding-left: 22px;
+}
+
+.admin-rich-editor:empty::before {
+  content: attr(data-placeholder);
+  color: #a99a8e;
+}
+
+.admin-form input[type="file"] { font-size: 13px; }
+
+.admin-form-row { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+
+.admin-url-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 2px;
+}
+
+.admin-url-row input {
+  flex: 1;
+  font: inherit;
+  font-size: 13px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(193, 120, 95, 0.3);
+}
+
+.admin-image-preview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.admin-image-thumb {
+  position: relative;
+  width: 84px;
+  height: 84px;
+}
+
+.admin-image-preview img,
+.admin-image-thumb img {
+  width: 84px;
+  height: 84px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  display: block;
+}
+
+.admin-image-thumb__remove {
+  position: absolute;
+  top: -7px;
+  right: -7px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: none;
+  background: #b3261e;
+  color: #fff;
+  font-size: 13px;
+  line-height: 1;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+}
+
+.admin-image-note { font-size: 12px; color: #8a7669; margin: 4px 0 0; }
+
+.admin-tip {
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: #6b5a4f;
+  background: #fdf1ea;
+  border: 1px solid rgba(193, 120, 95, 0.25);
+  border-radius: 10px;
+  padding: 10px 14px;
+  margin: -2px 0 2px;
+}
+
+.admin-tip strong { color: #4f362b; }
+
+/* ---- Gallery tab: the shared media library ---- */
+.admin-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 14px;
+  margin-top: 16px;
+}
+
+.admin-gallery-item {
+  border: 1px solid rgba(193, 120, 95, 0.15);
+  border-radius: 10px;
+  overflow: hidden;
+  background: #fffaf6;
+}
+
+.admin-gallery-item img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  display: block;
+}
+
+.admin-gallery-item__body {
+  padding: 8px;
+  display: grid;
+  gap: 6px;
+}
+
+.admin-gallery-item__body input[type="text"] {
+  font: inherit;
+  font-size: 12.5px;
+  padding: 5px 7px;
+  border-radius: 6px;
+  border: 1px solid rgba(193, 120, 95, 0.3);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.admin-gallery-item__actions {
+  display: flex;
+  gap: 6px;
+}
+
+/* ---- Inline "choose from gallery" picker used in the blog post form ---- */
+.admin-gallery-picker {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  gap: 8px;
+  margin-top: 8px;
+  padding: 10px;
+  border: 1px dashed rgba(193, 120, 95, 0.35);
+  border-radius: 10px;
+  max-height: 260px;
+  overflow-y: auto;
+}
+
+.admin-gallery-picker__empty {
+  grid-column: 1 / -1;
+  font-size: 12.5px;
+  color: #8a7669;
+}
+
+.admin-gallery-picker__item {
+  border: none;
+  padding: 0;
+  background: none;
+  cursor: pointer;
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+}
+
+.admin-gallery-picker__item img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  display: block;
+  border-radius: 8px;
+  border: 2px solid transparent;
+  transition: border-color 0.15s ease;
+}
+
+.admin-gallery-picker__item:hover img {
+  border-color: #c1785f;
+}
+
+.admin-gallery-picker__item span {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  font-size: 10.5px;
+  padding: 2px 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.admin-toolbar {
+  display: flex;
+  width: fit-content;
+  gap: 6px;
+  margin: 2px 0 6px;
+  /* Stays visible just under the top bar while scrolling through a long
+     post, so you don't have to scroll back up to reach Bold/Link/List. */
+  position: sticky;
+  top: 60px;
+  z-index: 5;
+  background: #f4ede6;
+  padding: 6px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.admin-toolbar__btn {
+  font: inherit;
+  font-size: 12.5px;
+  padding: 5px 10px;
+  border-radius: 7px;
+  border: 1px solid rgba(193, 120, 95, 0.35);
+  background: #fff;
+  cursor: pointer;
+  color: #4f362b;
+}
+
+.admin-toolbar__btn:hover { background: #fdf1ea; }
+
+.admin-actions { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-top: 4px; }
+
+.admin-btn {
+  font: inherit;
+  font-size: 13.5px;
+  font-weight: 600;
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+.admin-btn--primary { background: #c1785f; color: #fff; }
+.admin-btn--ghost { background: #fff; border-color: rgba(193, 120, 95, 0.4); color: #4f362b; }
+.admin-btn--danger { background: #fff; border-color: rgba(179, 38, 30, 0.35); color: #b3261e; }
+.admin-btn--small { padding: 6px 12px; font-size: 12.5px; }
+.admin-btn:disabled { opacity: 0.55; cursor: default; }
+
+.admin-status { font-size: 13px; margin-top: 4px; }
+.admin-status--ok { color: #2f7d4f; }
+.admin-status--error { color: #b3261e; }
+
+.admin-list { display: grid; gap: 10px; margin-top: 18px; }
+
+.admin-list-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 14px;
+  border: 1px solid rgba(193, 120, 95, 0.15);
+  border-radius: 12px;
+  background: #fffaf6;
+}
+
+.admin-list-item img {
+  width: 52px;
+  height: 52px;
+  border-radius: 8px;
+  object-fit: cover;
+  flex-shrink: 0;
+  background: #eee;
+}
+
+.admin-list-item__body { flex: 1; min-width: 0; }
+.admin-list-item__title { font-weight: 600; font-size: 14px; margin: 0 0 2px; }
+.admin-list-item__meta { font-size: 12.5px; color: #8a7669; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.admin-list-item__actions { display: flex; gap: 6px; flex-shrink: 0; }
+
+.admin-nav-row, .admin-faq-row {
+  display: grid;
+  grid-template-columns: 1fr 2fr auto;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.admin-empty { font-size: 13px; color: #8a7669; padding: 8px 0; }
+
+@media (max-width: 640px) {
+  .admin-nav-row, .admin-faq-row { grid-template-columns: 1fr; }
+  .admin-list-item { flex-wrap: wrap; }
+}

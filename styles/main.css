@@ -1268,6 +1268,15 @@ summary {
   font-family: "Space Mono", "Work Sans", monospace;
 }
 
+.footer__bottom-links-admin {
+  opacity: 0.55;
+  font-weight: 500;
+}
+
+.footer__bottom-links-admin:hover {
+  opacity: 0.9;
+}
+
 .footer__bottom a:hover {
   color: #fff;
 }

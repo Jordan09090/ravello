@@ -1,75 +1,9 @@
-const nav = document.querySelector('.nav');
-const toggle = document.querySelector('.nav__toggle');
-const navLinks = document.querySelector('.nav__links');
-const links = document.querySelectorAll('.nav__links a');
-const observedSections = document.querySelectorAll('[data-nav-theme]');
+// Nav bar and footer behaviour (toggle, smooth-scroll, scroll-spy theme,
+// footer year) now live in scripts/site-chrome.js, since that's also what
+// injects the nav/footer markup itself — see site-chrome.html.
+// This file only handles page content that isn't part of the shared chrome.
+
 const featureImg = document.querySelector('.feature__media img');
-
-const applyNavTheme = (theme = 'light') => {
-  if (!nav) return;
-  nav.classList.toggle('nav--on-dark', theme === 'dark');
-  nav.classList.toggle('nav--on-light', theme !== 'dark');
-};
-
-if (toggle && navLinks) {
-  toggle.addEventListener('click', () => {
-    navLinks.classList.toggle('is-open');
-  });
-}
-
-const setActiveLink = id => {
-  links.forEach(link => {
-    link.classList.toggle('is-active', link.getAttribute('href') === `#${id}`);
-  });
-};
-
-links.forEach(link => {
-  link.addEventListener('click', event => {
-    const targetId = link.getAttribute('href');
-    const section = document.querySelector(targetId);
-    if (section) {
-      event.preventDefault();
-      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      navLinks.classList.remove('is-open');
-    }
-  });
-});
-
-if (nav && observedSections.length) {
-  const navLine = () => (nav.getBoundingClientRect().height || 80) + 10;
-
-  const updateNavTheme = () => {
-    const checkLine = navLine();
-    let activeId = '';
-    let theme = 'light';
-
-    observedSections.forEach(section => {
-      const rect = section.getBoundingClientRect();
-      const isInView = rect.top <= checkLine && rect.bottom >= checkLine;
-      if (isInView) {
-        theme = section.dataset.navTheme || 'light';
-        activeId = section.id || '';
-      }
-    });
-
-    applyNavTheme(theme);
-    if (activeId) setActiveLink(activeId);
-  };
-
-  let ticking = false;
-  const requestUpdate = () => {
-    if (ticking) return;
-    ticking = true;
-    requestAnimationFrame(() => {
-      updateNavTheme();
-      ticking = false;
-    });
-  };
-
-  window.addEventListener('scroll', requestUpdate, { passive: true });
-  window.addEventListener('resize', requestUpdate, { passive: true });
-  updateNavTheme();
-}
 
 // subtle parallax on feature image
 if (featureImg && window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
@@ -87,6 +21,3 @@ if (featureImg && window.matchMedia('(prefers-reduced-motion: no-preference)').m
   window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('resize', onScroll, { passive: true });
 }
-
-const footerYear = document.querySelector('[data-year]');
-if (footerYear) footerYear.textContent = new Date().getFullYear();
